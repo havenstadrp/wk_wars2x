@@ -36,7 +36,7 @@ CONFIG = {}
 -- Radar fast limit locking
 -- When enabled, the player will be able to define a fast limit within the radar's menu, when a vehicle 
 -- exceeds the fast limit, it will be locked into the fast box. Default setting is disabled to maintain realism
-CONFIG.allow_fast_limit = false 
+CONFIG.allow_fast_limit = true 
 
 -- In-game first time quick start video
 -- When enabled, the player will be asked if they'd like to view the quick start video the first time they 

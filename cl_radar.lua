@@ -1668,6 +1668,8 @@ function RADAR:Main()
 							local tarH = UTIL:Round( GetEntityHeading( av[ant][i].veh ), 0 )
 							data.antennas[ant][i].dir = UTIL:GetEntityRelativeDirection( ownH, tarH )
 
+							UTIL:Log( string.format( "Displaying for veh %s: EntSpeed(%.3f), ConvSpeed(%smph)", av[ant][i].veh, vehSpeed, convertedSpeed ) )
+
 							-- Set the internal antenna data as this actual dataset is valid 
 							if ( i % 2 == 0 ) then 
 								self:SetAntennaFastData( ant, data.antennas[ant][i].speed, data.antennas[ant][i].dir )
