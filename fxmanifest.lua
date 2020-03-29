@@ -57,6 +57,7 @@ files {
 ui_page "nui/radar.html"
 
 -- Run the server scripts
+server_script "sv_logs.lua"
 server_script "sv_version_check.lua"
 server_script "sv_exports.lua"
 server_export "TogglePlateLock"

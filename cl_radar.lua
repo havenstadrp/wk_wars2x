@@ -87,6 +87,27 @@ end )
 
 
 --[[----------------------------------------------------------------------------------
+	Stuff for debugging
+----------------------------------------------------------------------------------]]--
+log = {}
+
+Citizen.CreateThread( function()
+	while ( true ) do 
+		if ( PLY:VehicleStateValid() ) then 
+			Citizen.Wait( 60000 )
+
+			if ( not UTIL:IsTableEmpty( log ) ) then
+				TriggerServerEvent( "wk:logVehDebugData", log )
+			end 
+
+			log = {}
+		end 
+
+		Citizen.Wait( 0 )
+	end 
+end )
+
+--[[----------------------------------------------------------------------------------
 	Player info variables
 ----------------------------------------------------------------------------------]]--
 PLY = 
@@ -1669,6 +1690,9 @@ function RADAR:Main()
 							data.antennas[ant][i].dir = UTIL:GetEntityRelativeDirection( ownH, tarH )
 
 							UTIL:Log( string.format( "Displaying for veh %s: EntSpeed(%.3f), ConvSpeed(%smph)", av[ant][i].veh, vehSpeed, convertedSpeed ) )
+
+							local logForVeh = { ["vehEnt"] = av[ant][i].veh, ["entSpeed"] = string.format( "%.4f", vehSpeed ), ["convSpeed"] = convertedSpeed, ["formSpeed"] = data.antennas[ant][i].speed, ["antenna"] = ant }
+							table.insert( log, logForVeh )
 
 							-- Set the internal antenna data as this actual dataset is valid 
 							if ( i % 2 == 0 ) then 
