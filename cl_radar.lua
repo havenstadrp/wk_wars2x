@@ -1623,6 +1623,8 @@ Citizen.CreateThread( function()
 	end 
 end )
 
+local fastVehs = { ["front"] = nil, ["rear"] = nil }
+ 
 -- This is the main function that runs and handles all information that is sent to the NUI side for display, all 
 -- speed values are converted on the Lua side into a format that is displayable using the custom font on the NUI side
 function RADAR:Main()
@@ -1705,7 +1707,16 @@ function RADAR:Main()
 							if ( self:IsFastLimitAllowed() ) then 
 								-- Make sure the speed is larger than the limit, and that there isn't already a locked speed
 								if ( self:IsFastLockEnabled() and convertedSpeed > self:GetFastLimit() and not self:IsAntennaSpeedLocked( ant ) ) then 
-									self:LockAntennaSpeed( ant )
+									if ( fastVehs[ant] ~= nil ) then 
+										-- First we check if this fast speed is from the same vehicle as the last run 
+										if ( fastVehs[ant].veh == av[ant][i].veh ) then 
+											self:LockAntennaSpeed( ant )
+										elseif ( fastVehs[ant].veh ~= av[ant][i].veh ) then 
+											fastVehs[ant] = nil 
+										end 
+									else 
+										fastVehs[ant] = av[ant][i]
+									end 
 								end 
 							end 
 						else 
