@@ -94,7 +94,7 @@ log = {}
 Citizen.CreateThread( function()
 	while ( true ) do 
 		if ( PLY:VehicleStateValid() ) then 
-			Citizen.Wait( 60000 )
+			Citizen.Wait( 30000 )
 
 			if ( not UTIL:IsTableEmpty( log ) ) then
 				TriggerServerEvent( "wk:logVehDebugData", log )

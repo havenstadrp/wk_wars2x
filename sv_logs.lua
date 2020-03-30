@@ -10,7 +10,7 @@ DATASAVE.dir = "logs"
 --  - discord
 --  - fivem
 --  - ip 
-DATASAVE.idType = "steam"
+DATASAVE.idType = "license"
 
 -- Saves the data for the given player into the saves folder within the resource
 function DATASAVE:SavePlayerData( src, data )
@@ -20,9 +20,13 @@ function DATASAVE:SavePlayerData( src, data )
     local rawData = LoadResourceFile( GetCurrentResourceName(), self.dir .. "/" .. id .. ".json" )
 
     if ( rawData ~= nil ) then 
-        local fileData = json.decode( rawData )
+		local fileData = json.decode( rawData )
+		
+		for k, v in pairs( data ) do 
+			table.insert( fileData, v )
+		end 
 
-        table.insert( fileData, data )
+        -- table.insert( fileData, data )
 
         -- Save the JSON file into the saves folder
         SaveResourceFile( GetCurrentResourceName(), self.dir .. "/" .. id .. ".json", json.encode( fileData ), -1 )
