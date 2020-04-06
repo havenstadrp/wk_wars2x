@@ -89,7 +89,7 @@ end )
 --[[----------------------------------------------------------------------------------
 	Stuff for debugging
 ----------------------------------------------------------------------------------]]--
-log = {}
+--[[ log = {}
 
 Citizen.CreateThread( function()
 	while ( true ) do 
@@ -105,7 +105,7 @@ Citizen.CreateThread( function()
 
 		Citizen.Wait( 0 )
 	end 
-end )
+end ) ]]
 
 --[[----------------------------------------------------------------------------------
 	Player info variables
@@ -1691,10 +1691,10 @@ function RADAR:Main()
 							local tarH = UTIL:Round( GetEntityHeading( av[ant][i].veh ), 0 )
 							data.antennas[ant][i].dir = UTIL:GetEntityRelativeDirection( ownH, tarH )
 
-							UTIL:Log( string.format( "Displaying for veh %s: EntSpeed(%.3f), ConvSpeed(%smph)", av[ant][i].veh, vehSpeed, convertedSpeed ) )
+							--UTIL:Log( string.format( "Displaying for veh %s: EntSpeed(%.3f), ConvSpeed(%smph)", av[ant][i].veh, vehSpeed, convertedSpeed ) )
 
-							local logForVeh = { ["vehEnt"] = av[ant][i].veh, ["entSpeed"] = string.format( "%.4f", vehSpeed ), ["convSpeed"] = convertedSpeed, ["formSpeed"] = data.antennas[ant][i].speed, ["antenna"] = ant }
-							table.insert( log, logForVeh )
+							--local logForVeh = { ["vehEnt"] = av[ant][i].veh, ["entSpeed"] = string.format( "%.4f", vehSpeed ), ["convSpeed"] = convertedSpeed, ["formSpeed"] = data.antennas[ant][i].speed, ["antenna"] = ant }
+							--table.insert( log, logForVeh )
 
 							-- Set the internal antenna data as this actual dataset is valid 
 							if ( i % 2 == 0 ) then 
