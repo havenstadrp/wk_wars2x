@@ -1710,12 +1710,19 @@ function RADAR:Main()
 									if ( fastVehs[ant] ~= nil ) then 
 										-- First we check if this fast speed is from the same vehicle as the last run 
 										if ( fastVehs[ant].veh == av[ant][i].veh ) then 
-											self:LockAntennaSpeed( ant )
+											-- Get the difference between the speed from the last check and now
+											local diff = math.abs( fastVehs[ant].entSpeed - vehSpeed )
+
+											-- If the difference is too large, then we don't lock the speed
+											if ( diff < 5 ) then 
+												self:LockAntennaSpeed( ant )
+											end 
+										-- Reset the current stored fast vehicle as it is different
 										elseif ( fastVehs[ant].veh ~= av[ant][i].veh ) then 
 											fastVehs[ant] = nil 
 										end 
 									else 
-										fastVehs[ant] = av[ant][i]
+										fastVehs[ant] = { veh = av[ant][i].veh, entSpeed = vehSpeed }
 									end 
 								end 
 							end 
